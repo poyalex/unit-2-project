@@ -17,21 +17,6 @@ exports.auth = async (req, res, next) => {
   }
 };
 
-// exports.listUsers = async (req, res) => {
-//   try {
-
-//    const listUsers = await User.find({});
-//    console.log(listUsers)
-//      res.json({
-//        users: listUsers,
-//      });
-    
-//   }
-//    catch (error) {
-//     res.status(421).json({ message: error.message });
-//   }
-// };
-
 exports.createUser = async (req, res) => {
   try {
     const user = new User(req.body);

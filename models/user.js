@@ -1,3 +1,4 @@
+require('dotenv').config()
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
@@ -6,7 +7,7 @@ const userSchema = new mongoose.Schema({
   name: String,
   email: String,
   password: String,
-  blogs: [{type: Schema.Types.ObjectId, required: true, ref: 'User'}]
+  blogs: [{type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User'}]
 })
 
 userSchema.pre('save', async function(next) {

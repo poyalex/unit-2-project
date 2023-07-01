@@ -15,7 +15,7 @@ exports.listBlog = async (req, res) => {
 }
 
 // router.get('/:id', userController.auth, blogController.getblog)
-exports.getblog = async (req, res) => {
+exports.getBlog = async (req, res) => {
     try{
         const blog = await Blog.findOne({_id: req.params.id})
         res.json(blog)
@@ -25,7 +25,7 @@ exports.getblog = async (req, res) => {
 }
 
 // router.post('/', blogController.createblog)
-//req.user is the user that is logged in
+// req.user is the user that is logged in
 exports.createBlog = async (req ,res) => {
     try {
         req.body.user = req.user._id
@@ -38,7 +38,7 @@ exports.createBlog = async (req ,res) => {
 }
 
 // router.post('/:id', blogController.updateblog)
-exports.updateblog = async (req, res) => {
+exports.updateBlog = async (req, res) => {
     try {
         const update = Object.keys(req.body)
         const toDo = await Blog.findOne({_id: req.params.id})

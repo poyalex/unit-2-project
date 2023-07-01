@@ -1,7 +1,6 @@
-const mongoose = require('mongoose')
-// const jwt = require('jsonwebtoken')
+const {model, Schema} = require('mongoose')
 
-const blogSchema = new mongoose.Schema(
+const blogSchema = new Schema (
   {
     title: String,
     content: String,
@@ -10,10 +9,5 @@ const blogSchema = new mongoose.Schema(
   {timestamps:true}
   )
 
-// blogSchema.methods.generateAuthToken = async function() {
-//   const token = jwt.sign({ _id: this._id }, 'secret')
-//   return token
-// }
-
-const Blog = mongoose.model('Blog', blogSchema)
+const Blog = model('Blog', blogSchema)
 module.exports = Blog
