@@ -5,31 +5,58 @@ const jwt = require('jsonwebtoken')
 // router.get('/', blogController.listblog)
 exports.listBlog = async (req, res) => {
     try{
-        if (!post) {
-            throw new Error()
-        }
-        const listBlogs = await Blog.find({})
+        const blog = await Blog.find({})
         res.json({
-            blogs: listBlogs,
+            blogs: blog,
         })
     } catch (error) {
         res.status(421).json({message: error.message})
     }
 }
 
+// router.get('/:id', userController.auth, blogController.getblog)
+exports.getblog = async (req, res) => {
+    try{
+        const blog = await Blog.findOne({_id: req.params.id})
+        res.json(blog)
+    } catch (error) {
+        res.status(421).json({message: error.message})
+    }
+}
+
 // router.post('/', blogController.createblog)
+//req.user is the user that is logged in
 exports.createBlog = async (req ,res) => {
     try {
-        req.body.user = req.params.find
-        const blog = await post.create(req.body)
+        req.body.user = req.user._id
+        const blog = await Blog.create(req.body)
         await req.user.save()
         res.json(blog)
     }catch(error){
         res.status(400).json({message: error.message})
     }
 }
-// router.post('/:id', blogController.updateblog)
-// exports.updateblog = async (req, res) => {
 
-// }
+// router.post('/:id', blogController.updateblog)
+exports.updateblog = async (req, res) => {
+    try {
+        const update = Object.keys(req.body)
+        const toDo = await Blog.findOne({_id: req.params.id})
+        update.forEach(update => toDo[update] = req.body[update])
+        await toDo.save()
+        res.json({message: 'Item Updated'})
+    }catch(error){
+        res.status(400).json({message:error.message})
+    }
+}
+
 // router.delete('/:id', blogController.deleteBlog)
+exports.deleteBlog = async (req, res) => {
+    try{
+        const blog = await Blog.findOne({_id: req.params.id})
+        blog.deleteOne()
+        res.json({message: 'Post Deleted'})
+    }catch(error){
+        res.status(400).json({message: error.message})
+    }
+}
