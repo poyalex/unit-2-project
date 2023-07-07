@@ -20,13 +20,6 @@ afterAll(async ()=>{
 
 describe('Test the user Endpoints', ()=>{
 
-  // test('It should return a list of users', async ()=>{
-  //   const response = await request(app)
-  //   .get('/users')
-  //   expect(Array.isArray(response.body.users)).toBe(true)
-  //   expect(response.statusCode).toBe(200)
-  // })
-
   test('It should create a new user', async ()=>{
     const response = await request(app)
     .post('/users')
@@ -42,10 +35,10 @@ describe('Test the user Endpoints', ()=>{
     await user.save()
     const response = await request(app)
     .post('/users/login')
-    .send({ email: 'john.doe@example.com', password: 'test123' })
-        
+    .send({ email: 'john.doe@example.com', password: 'test' })
+
     expect(response.statusCode).toBe(200)
-    expect(response.body.user.name).toEqual('John Doe')
+    expect(response.body.user.name).toBe('John Doe')
     expect(response.body.user.email).toEqual('john.doe@example.com')
     expect(response.body).toHaveProperty('token')
   })
@@ -53,15 +46,15 @@ describe('Test the user Endpoints', ()=>{
   test('It should log out a user',async ()=>{
     const response = await request(app)
     .post('/users/logout')
-    .send({email:'john.doe@example.com'})
+    .send({email:'test@example.com'})
 
     expect(response.body.message).toEqual('Logout Sucessful')
   })
 
   test('It should update a user', async ()=>{
     const user = new User({
-    name:'Bao',
-    email:"baoemail@email.com",
+    name:'BillyG',
+    email:"bigbilly@email.com",
     password:'123'})
     await user.save()
     const token = await user.generateAuthToken()

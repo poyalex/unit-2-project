@@ -55,7 +55,7 @@ exports.deleteBlog = async (req, res) => {
     try{
         const blog = await Blog.findOne({_id: req.params.id})
         blog.deleteOne()
-        res.json({message: 'Post Deleted'})
+        res.json({message: 'Blog Deleted'})
     }catch(error){
         res.status(400).json({message: error.message})
     }
