@@ -1,6 +1,8 @@
 ## API Overview:
 -This API allows a user to login and create blog posts
+
 <img src = "https://imgur.com/a/7ChRFso">
+
 ## Requirements:
 -node.js, VSCode, npm, nodemon (globally installed)
 ## Installation
